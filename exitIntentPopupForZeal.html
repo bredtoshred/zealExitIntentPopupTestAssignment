@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>
+		zeal exit intent popup test assignement
+	</title>
+
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" rel="script">
+<link rel="stylesheet" type="text/css" href="https://cloud.webtype.com/css/f8780814-4f06-4cb3-a33a-a4037a65ed35.css">
+<link rel="stylesheet" type="text/css" href="exitIntentPopupForZeal.css">
+
+<meta charset="utf-8">
+
+	<style type="text/css">
+		/*see external css with same title*/
+	</style>
+
+</head>
+<body>
+
+	<!-- iframe for website to be background -->
+	<iframe src="http://www.zealoptics.com/" frameborder="0" scrolling="“yes”" style="overflow:scroll;overflow-x:hidden;overflow-y:scroll;height:100%;width:100%;position:absolute;top:0px;left:0px;right:0px;bottom:0px" height="150%" width="150%"></iframe>
+
+	<div class="grayOverlay"> </div>
+	<div class="lightbox" id="signUp">
+	    <div class="box">
+	        <div id="container">
+		        <h1>NEW TO ZEAL?</h1>
+		        <p id="couponCodeInfo"> Use code NEWCREWTEN for 10% off your first order. </p>
+		        <div class="content">
+					<form id="emailBoxContainer" action="" method="POST" enctype="multipart/form-data"> 
+				    	<!-- <input type="hidden" name="action" value="submit">  -->
+				  
+				    	<!-- email box  -->
+				    	<input name="email" type="text" id="emailTextBox" value="Your Email Address"/><a onclick="outputEmailToConsole(); openWelcome();" onkeydown="if(event.keycode==13){outputEmailToConsole();}") =><img id="plus" width:"30px" src="img/plus.jpg"></a>
+				    </form> 
+					
+				<p class="conditions"> Offer expires in 48 hours. New customers only. Not valid on gift card purchases. Cannot be combined with other discounts.</p>
+
+	        	</div>
+	    	</div> <!-- container -->
+	    </div>
+	</div> <!-- signup lightbox popup  -->
+
+
+	<div class="welcome" id="signUp">
+	    <div class="box">
+	        <div id="welcomeAboardContent">
+		        <h1 id="waHeader" >WELCOME ABOARD.</h1>
+		        <p id="rememberCouponCodeInfo" > Remember to use code NEWCREWTEN at checkout to get 10% off your first order. </p>
+		        <a class="shoppingLinks" href="http://www.zealoptics.com/en/shop/goggles?all=true"> <span class="shoppingLinkText">SHOP GOGGLES </span> </a>
+		        <a class="shoppingLinks" href="http://www.zealoptics.com/en/shop/sunglasses?all=true"> <span class="rightShoppingLinkText">SHOP SUNGLASSES </span> </a>
+
+		        <p id="moreConditions"> Offer expires in 48 hours. New customers only. Not valid on gift card purchases. Cannot be combined with other discounts.</p>
+			</div> <!-- welcomeAboardContent -->
+
+			<div id="shareTheLoveContent">
+		        <h2>SHARE THE LOVE.</h2>
+		        <p id="inviteYourFriends" > You're about to save. Why not hook up your friends too. </p>
+		        	<div id="iconLinks">
+		        		<a href=""> <img src="img/facebook.png" class="facebook"></a>
+		        		<a href=""> <img src="img/twitter.png" class="shareIcon"></a>
+		        		<a href=""> <img src="img/googlePlus.png" class="shareIcon"></a>
+		        		<a href=""> <img src="img/envelope.png" class="shareIcon"></a>
+		        	</div>	
+			</div> <!-- shareTheLoveContent -->
+	    </div>
+	</div> <!-- signup lightbox popup  -->
+
+</body>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	
+	<!--the basic outline of thos javascript was found at http://webdesignerhut.com/create-an-exit-intent-popup-window/-->
+
+<script>
+	
+	function outputEmailToConsole(){
+			var emailAddress = document.getElementById("emailTextBox").value;
+			console.log(emailAddress);
+		}
+
+	$(document).mouseup(function (e){
+	    var container = $('.lightbox');
+
+	    if (!container.is(e.target) // if the target of the click isn't the container...
+	        && container.has(e.target).length === 0) // ... nor a descendant of the container
+	    {
+	        container.hide();
+	    }
+	});
+	
+	// Exit intent
+	function addEvent(obj, evt, fn) {
+	    if (obj.addEventListener) {
+	        obj.addEventListener(evt, fn, false);
+	        // obj.addEventListener(clickout)
+	    }
+	    else if (obj.attachEvent) {
+	        obj.attachEvent("on" + evt, fn);
+	    }
+	}
+
+	// Exit intent trigger
+	addEvent(document, 'mouseout', function(evt) {
+
+	    if (evt.toElement == null && evt.relatedTarget == null ) {
+	        $('.lightbox').slideDown();
+	        // $('.grayOverlay').style.visibility = 'visible';
+	        if($('.grayOverlay').css('display') == 'none'){
+            $('.grayOverlay').css('display', 'block');
+           }
+	    };
+
+	});
+
+	// Closing the Popup Box
+	//TODO - this doeant work yet, did not have time to finish, focused on design instead
+	$('lightbox.close').click(function(){
+	    $('.lightbox').slideUp();
+	});
+
+	//works to close first lightbox and open welcome screen
+	function openWelcome() {
+		// console.log("closeBox()");
+		$('.lightbox').slideUp();
+		welcome();
+	} 
+
+	function welcome(){
+		$('.welcome').slideDown();
+
+	}
+</script>
+	
+
+</html>
+
+
+
+
